@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="WeatherRestClient\" />
     <Folder Include="ServicesHandler\" />
     <Folder Include="Views\" />
   </ItemGroup>

@@ -35,7 +35,7 @@ namespace WeatherApp
 
         protected override void OnAppearing()
         {
-            ViewModel.SearchCityCommand.Execute("Lisbon");
+            ViewModel.LoadDataCommand.Execute(null);
 
             base.OnAppearing();
         }

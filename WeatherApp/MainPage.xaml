@@ -6,11 +6,15 @@
              mc:Ignorable="d"
              x:Class="WeatherApp.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+
+    <ListView ItemsSource="{Binding Weathers}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding CityName}">
+                    
+                </TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 
 </ContentPage>

@@ -13,12 +13,16 @@ namespace WeatherApp.WeatherRestClient
     {
 
         private const string OpenWeatherApi = "http://api.openweathermap.org/data/2.5/weather?q=";
+        private const string OpenMultipleWeatherApi = "http://api.openweathermap.org/data/2.5/box/city?bbox=";
         private const string Key = "653b1f0bf8a08686ac505ef6f05b94c2";
         HttpClient _httpClient = new HttpClient();
 
-        public Task<IEnumerable<Weather>> GetSeveralCitiesWheaterAsync()
+        public async Task<CitiesWeather> GetSeveralCitiesWheaterAsync()
         {
-            throw new NotImplementedException();
+
+            var json = await _httpClient.GetStringAsync("http://api.openweathermap.org/data/2.5/box/city?bbox=12,32,15,37,10&APPID=653b1f0bf8a08686ac505ef6f05b94c2");
+            var getWeatherModels = JsonConvert.DeserializeObject<CitiesWeather>(json);
+            return getWeatherModels;
         }
 
         public async Task<Weather> GetWheater(string city)

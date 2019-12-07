@@ -8,7 +8,7 @@ namespace WeatherApp.ViewModels
 {
     public interface IWeatherRepository
     {
-        Task<IEnumerable<Weather>> GetSeveralCitiesWheaterAsync();
+        Task<CitiesWeather> GetSeveralCitiesWheaterAsync();
         Task<Weather> GetWheater(string city);    
     }
 }

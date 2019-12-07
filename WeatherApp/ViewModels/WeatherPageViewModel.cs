@@ -57,7 +57,7 @@ namespace WeatherApp.ViewModels
             // So, here I've called  LINQ Select() extension method to map these Weather objects to WeatherViewModel. 
             var results = await _repository.GetSeveralCitiesWheaterAsync();
 
-            foreach (var result in results)
+            foreach (var result in results.Weather)
                 Weathers.Add(new WeatherViewModel(result));
         }
 

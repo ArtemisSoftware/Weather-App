@@ -7,6 +7,9 @@ namespace WeatherApp.Models
 {
     public class Weather
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
         [JsonProperty("name")]
         public string name { get; set; }
         public WeatherTempDetails main { get; set; }

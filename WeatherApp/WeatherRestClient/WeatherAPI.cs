@@ -20,7 +20,7 @@ namespace WeatherApp.WeatherRestClient
         public async Task<CitiesWeather> GetSeveralCitiesWheaterAsync()
         {
 
-            var json = await _httpClient.GetStringAsync("http://api.openweathermap.org/data/2.5/box/city?bbox=12,32,15,37,10&APPID=653b1f0bf8a08686ac505ef6f05b94c2");
+            var json = await _httpClient.GetStringAsync("http://api.openweathermap.org/data/2.5/box/city?bbox=12,32,15,37,10" + "&APPID=" + Key);
             var getWeatherModels = JsonConvert.DeserializeObject<CitiesWeather>(json);
             return getWeatherModels;
         }

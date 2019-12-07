@@ -7,7 +7,9 @@
              x:Class="WeatherApp.MainPage">
 
 
-    <ListView ItemsSource="{Binding Weathers}">
+    <ListView ItemsSource="{Binding Weathers}"
+              SelectedItem="{Binding SelectedWeather, Mode=TwoWay}"
+			  ItemSelected="OnCitySelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding CityName}">

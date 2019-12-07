@@ -4,15 +4,18 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WeatherApp.Views;
 using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
-    public class WeatherPageViewModel
+    public class WeatherPageViewModel : BaseViewModel
     {
         
         private IWeatherRepository _repository;
+        private IPageService _pageService;
         private bool _isDataLoaded;
+        private WeatherViewModel _selectedWeather;
 
 
         // Note that I've initialized Contacts to a new ObservableCollection 
@@ -23,21 +26,34 @@ namespace WeatherApp.ViewModels
         public ObservableCollection<WeatherViewModel> Weathers { get; private set; }
             = new ObservableCollection<WeatherViewModel>();
 
+        public WeatherViewModel SelectedWeather
+        {
+            get { return _selectedWeather; }
+            set { SetValue(ref _selectedWeather, value); }
+        }
+
+
+
 
         public ICommand LoadDataCommand { get; private set; }
         public ICommand SearchCityCommand { get; private set; }
 
+        public ICommand SelectWeatherCommand { get; private set; }
 
-        public WeatherPageViewModel(IWeatherRepository repository)
+
+        public WeatherPageViewModel(IWeatherRepository repository, IPageService pageService)
         {
             _repository = repository;
-            
+            _pageService = pageService;
+
 
             // Because LoadData is an async method and returns Task, we cannot pass its name as an Action to the constructor of the Command. 
             // So, we need to define an inline function using a lambda expression and manually call it using await. 
             LoadDataCommand = new Command(async () => await LoadData());
 
             SearchCityCommand = new Command<string>(async city => await SearchCity(city));
+
+            SelectWeatherCommand = new Command<WeatherViewModel>(async weather => await SelectWeather(weather));
 
         }
 
@@ -71,6 +87,17 @@ namespace WeatherApp.ViewModels
             Weathers.Add(new WeatherViewModel(result));
         }
 
+
+        private async Task SelectWeather(WeatherViewModel weather)
+        {
+            if (weather == null)
+                return;
+
+            SelectedWeather = null;
+
+            //var viewModel = new WeatherDetailViewModel(weather, _repository, _pageService);
+            await _pageService.PushAsync(new WeatherDetailPage(/*viewModel*/));
+        }
 
 
     }

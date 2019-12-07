@@ -20,7 +20,8 @@ namespace WeatherApp
         {
 
             var api = new WeatherAPI();
-            ViewModel = new WeatherPageViewModel(api);
+            var pageService = new PageService();
+            ViewModel = new WeatherPageViewModel(api, pageService);
 
             InitializeComponent();
         }
@@ -30,6 +31,12 @@ namespace WeatherApp
         {
             get { return BindingContext as WeatherPageViewModel; }
             set { BindingContext = value; }
+        }
+
+
+        void OnCitySelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.SelectWeatherCommand.Execute(e.SelectedItem);
         }
 
 

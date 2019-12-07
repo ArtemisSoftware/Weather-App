@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeatherApp.ViewModels;
+using WeatherApp.WeatherRestClient;
 using Xamarin.Forms;
 
 namespace WeatherApp
@@ -13,9 +15,31 @@ namespace WeatherApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
+
+            var api = new WeatherAPI();
+            ViewModel = new WeatherPageViewModel(api);
+
             InitializeComponent();
         }
+
+
+        public WeatherPageViewModel ViewModel
+        {
+            get { return BindingContext as WeatherPageViewModel; }
+            set { BindingContext = value; }
+        }
+
+
+        protected override void OnAppearing()
+        {
+            ViewModel.SearchCityCommand.Execute("Lisbon");
+
+            base.OnAppearing();
+        }
+
+
     }
 }

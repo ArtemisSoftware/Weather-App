@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
-    class WeatherPageViewModel
+    public class WeatherPageViewModel
     {
         
         private IWeatherRepository _repository;
@@ -25,7 +25,7 @@ namespace WeatherApp.ViewModels
 
 
         public ICommand LoadDataCommand { get; private set; }
-        public ICommand SelectCityCommand { get; private set; }
+        public ICommand SearchCityCommand { get; private set; }
 
 
         public WeatherPageViewModel(IWeatherRepository repository)
@@ -33,11 +33,12 @@ namespace WeatherApp.ViewModels
             _repository = repository;
             
 
-            // Because LoadData is an async method and returns Task, we cannot
-            // pass its name as an Action to the constructor of the Command. 
-            // So, we need to define an inline function using a lambda expression
-            // and manually call it using await. 
+            // Because LoadData is an async method and returns Task, we cannot pass its name as an Action to the constructor of the Command. 
+            // So, we need to define an inline function using a lambda expression and manually call it using await. 
             LoadDataCommand = new Command(async () => await LoadData());
+
+            SearchCityCommand = new Command<string>(async city => await SearchCity(city));
+
         }
 
 
@@ -60,6 +61,15 @@ namespace WeatherApp.ViewModels
                 Weathers.Add(new WeatherViewModel(result));
         }
 
+
+        private async Task SearchCity(string city)
+        {
+            if (city == null)
+                return;
+
+            var result = await _repository.GetWheater(city);
+            Weathers.Add(new WeatherViewModel(result));
+        }
 
 
 

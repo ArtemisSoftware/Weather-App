@@ -95,8 +95,10 @@ namespace WeatherApp.ViewModels
 
             SelectedWeather = null;
 
-            //var viewModel = new WeatherDetailViewModel(weather, _repository, _pageService);
-            await _pageService.PushAsync(new WeatherDetailPage(/*viewModel*/));
+            //var viewModel = new WeatherDetailPageViewModel(weather.CityName, _repository, _pageService);
+            //await _pageService.PushAsync(new WeatherDetailPage(viewModel));
+
+            await _pageService.PushAsync(new WeatherDetailPage());
         }
 
 

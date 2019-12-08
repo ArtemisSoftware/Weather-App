@@ -26,7 +26,20 @@ namespace WeatherApp.ViewModels
             // While these few lines of property assignment are not a major issue, if this still bothers you, you can use a convention-based mapping library like AutoMapper.
             Id = weather.Id;
             _cityName = weather.name;
-            _icon = weather.weather[0].icon;
+
+            if(weather.sys != null)
+            {
+                _country = weather.sys.country;
+            }
+
+            if (weather.weather != null)
+            {
+                _icon = weather.weather[0].icon;
+            }
+
+            //
+            //_temp = weather.main.temp;
+            //
         }
 
 
@@ -50,6 +63,30 @@ namespace WeatherApp.ViewModels
                 OnPropertyChanged(nameof(CityName));
             }
         }
+
+
+        private string _country;
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                SetValue(ref _country, value);
+                OnPropertyChanged(nameof(Country));
+            }
+        }
+
+        private string _temp;
+        public string Temp
+        {
+            get { return _temp; }
+            set
+            {
+                SetValue(ref _temp, value);
+                OnPropertyChanged(nameof(_temp));
+            }
+        }
+
 
         private string _icon;
         public string Icon

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using WeatherApp.Models;
 
@@ -26,8 +27,9 @@ namespace WeatherApp.ViewModels
             // While these few lines of property assignment are not a major issue, if this still bothers you, you can use a convention-based mapping library like AutoMapper.
             Id = weather.Id;
             _cityName = weather.name;
+            _selected = Color.Red;
 
-            if(weather.sys != null)
+            if (weather.sys != null)
             {
                 _country = weather.sys.country;
             }
@@ -83,7 +85,7 @@ namespace WeatherApp.ViewModels
             set
             {
                 SetValue(ref _temp, value);
-                OnPropertyChanged(nameof(_temp));
+                OnPropertyChanged(nameof(Temp));
             }
         }
 
@@ -100,6 +102,17 @@ namespace WeatherApp.ViewModels
         }
 
 
+        private Color _selected;
+
+        public Color Selected
+        {
+            get { return _selected; }
+            set
+            {
+                SetValue(ref _selected, value);
+                OnPropertyChanged(nameof(Selected));
+            }
+        }
 
     }
 }

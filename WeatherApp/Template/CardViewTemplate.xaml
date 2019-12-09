@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WeatherApp.Template.CardViewTemplate">
+    <ContentView.Content>
+        <Frame IsClippedToBounds="True"  
+           HasShadow="True"  
+           Padding="0"  
+           BackgroundColor="White" >
+            <Frame.OutlineColor>
+                <OnPlatform x:TypeArguments="Color"  Android="Gray" iOS="Gray"/>
+            </Frame.OutlineColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness"  Android="12"  iOS="10"/>
+            </Frame.Margin>
+            <StackLayout Orientation="Horizontal">
+                <BoxView  WidthRequest="6"/>
+                <Grid VerticalOptions="CenterAndExpand"  
+                 Padding="0"  
+                 HorizontalOptions="FillAndExpand"  
+                 BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" FontAttributes="Bold"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="18"  
+                           Text="{Binding CityName, Mode = TwoWay}">
+                        <Label.LineBreakMode>
+                            <OnPlatform x:TypeArguments="LineBreakMode" Android="NoWrap" iOS="TailTruncation"/>
+                        </Label.LineBreakMode>
+                    </Label>
+                    
+                    <BoxView Grid.Row="1" Color="Transparent"  HorizontalOptions="FillAndExpand" HeightRequest="1"/>
+                    
+                    
+                    <Grid Grid.Row="2" BackgroundColor="Transparent" Padding="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Id:"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id, Mode = TwoWay}"/>
+                        <BoxView Grid.Row="0" Grid.Column="2" Color="{Binding Selected, Mode = TwoWay}"  HorizontalOptions="End" HeightRequest="1"/>
+                    </Grid>
+
+                    
+
+
+
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

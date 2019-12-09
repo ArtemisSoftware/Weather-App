@@ -93,12 +93,22 @@ namespace WeatherApp.ViewModels
             if (weather == null)
                 return;
 
+            for (int i = 0; i < Weathers.Count; ++i){
+
+                if (weather.Id.Equals(Weathers[i].Id)){
+                    weather.Selected = Color.Green;
+                    Weathers[i].Selected = Color.Green;
+                    break;
+                }
+
+            }
+
             SelectedWeather = null;
 
             //var viewModel = new WeatherDetailPageViewModel(weather.CityName, _repository, _pageService);
             //await _pageService.PushAsync(new WeatherDetailPage(viewModel));
 
-            await _pageService.PushAsync(new WeatherDetailPage());
+            //await _pageService.PushAsync(new WeatherDetailPage());
         }
 
 

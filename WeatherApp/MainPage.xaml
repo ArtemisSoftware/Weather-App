@@ -4,9 +4,40 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:WeatherApp.Template"     
              x:Class="WeatherApp.MainPage">
 
 
+    <StackLayout Orientation="Vertical">
+        <Label Text="CardView Demo in Xamarin Forms"  
+               FontAttributes="Bold"  
+               FontSize="Medium"  
+               VerticalOptions="Start"  
+               HorizontalTextAlignment="Center"  
+               VerticalTextAlignment="Center"  
+               BackgroundColor="Transparent"  
+               HorizontalOptions="CenterAndExpand" />
+
+        <Button Text="View Details"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+
+        <ListView SelectedItem="{Binding SelectedWeather,Mode=TwoWay}"   
+                  HasUnevenRows="True"  
+                  ItemsSource="{Binding Weathers}"
+                  ItemSelected="OnCitySelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <local:CardViewTemplate/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+
+<!--
     <ListView ItemsSource="{Binding Weathers}"
               SelectedItem="{Binding SelectedWeather, Mode=TwoWay}"
 			  ItemSelected="OnCitySelected">
@@ -18,5 +49,6 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    -->
 
 </ContentPage>
